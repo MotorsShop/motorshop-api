@@ -7,5 +7,22 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = "file:./dev.db"
+}
+
+model Anouncement {
+  id           Int      @id @default(autoincrement())
+  title        String //@db.VarChar(50)
+  year         Int
+  km           Int
+  price        Float
+  description  String
+  vehicle_type String
+  ad_type      String
+  published    Boolean
+  sold         Boolean
+  cover_img    String
+  created      DateTime @updatedAt
+
+  @@map("Anouncement")
 }
