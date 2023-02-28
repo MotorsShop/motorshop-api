@@ -1,9 +1,10 @@
-import { Router } from "express"
-import anouncementRoutes from "./anouncement/anouncement.routes"
-    
-const routes = Router()
+import { Router } from 'express';
+import anouncementRoutes from './anouncement/anouncement.routes';
+import userRoutes from './user/user.routes';
 
-routes.use('/anouncement', anouncementRoutes)
+const routes = Router();
 
+routes.use('/anouncement', anouncementRoutes);
+routes.use('/user', userRoutes);
 
-export default routes
+export default routes;
