@@ -1,13 +1,18 @@
-import { Router } from "express"
-import { createAnouncementControllers, listAnouncementControllers, retrieveAnouncementControllers, deleteAnouncementControllers, updateAnouncementControllers } from "../../controllers/anouncement.controllers"
+import { Router } from 'express';
+import {
+  createAnouncementControllers,
+  listAnouncementControllers,
+  retrieveAnouncementControllers,
+  deleteAnouncementControllers,
+  updateAnouncementControllers,
+} from '../../controllers/anouncement.controller';
 
+const anouncementRoutes = Router();
 
-const anouncementRoutes = Router()
+anouncementRoutes.post('', createAnouncementControllers);
+anouncementRoutes.get('', listAnouncementControllers);
+anouncementRoutes.get('/:id', retrieveAnouncementControllers);
+anouncementRoutes.delete('/:id', deleteAnouncementControllers);
+anouncementRoutes.patch('/:id', updateAnouncementControllers);
 
-anouncementRoutes.post('', createAnouncementControllers)
-anouncementRoutes.get('', listAnouncementControllers)
-anouncementRoutes.get('/:id', retrieveAnouncementControllers)
-anouncementRoutes.delete('/:id', deleteAnouncementControllers)
-anouncementRoutes.patch('/:id', updateAnouncementControllers)
-
-export default anouncementRoutes 
+export default anouncementRoutes;
