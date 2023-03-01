@@ -1,23 +1,20 @@
-import { Request, Response } from "express"
-import createAnouncementService from "../Services/Anouncement/createAnouncement.service"
-import listAnouncementService from "../Services/Anouncement/listAnouncement.service"
-import retrieveAnouncementService from "../Services/Anouncement/retrieveAnouncement.service"
-import deleteAnouncimentService from "../Services/Anouncement/deleteAnouncement.service"
-import updateAnouncimentService from "../Services/Anouncement/updateAnouncement.service"
+import { Request, Response } from 'express';
+import createAnouncementService from '../Services/Anouncement/createAnouncement.service';
+import listAnouncementService from '../Services/Anouncement/listAnouncement.service';
+import retrieveAnouncementService from '../Services/Anouncement/retrieveAnouncement.service';
+import deleteAnouncimentService from '../Services/Anouncement/deleteAnouncement.service';
+import updateAnouncimentService from '../Services/Anouncement/updateAnouncement.service';
 
+const createAnouncementControllers = async (req:Request, res:Response) => {
+  try {
+    const { ...data } = req.body;
+    const newAnouncement = await createAnouncementService(data);
+    return res.status(201).json(newAnouncement);
 
-const createAnouncementControllers = async ( req:Request, res:Response) => {
-    try {
-
-        const { ...data } = req.body
-        const newAnouncement = await createAnouncementService(data)
-
-        return res.status(201).json(newAnouncement)
-        
-    } catch (error) {
-        if(error instanceof Error){
-            return res.status(400).json({
-                message: error.message
+} catch (error) {
+    if(error instanceof Error){
+    return res.status(400).json({
+        message:error.message
             })  
     }
     }   
@@ -77,7 +74,6 @@ const deleteAnouncementControllers = async (req:Request, res:Response) => {
 const updateAnouncementControllers = async (req:Request, res:Response) => {
     
     try {
-       
         const { id } = req.params
         const anouncDate = req.body
         const updateAnouncement = await updateAnouncimentService(id,anouncDate)

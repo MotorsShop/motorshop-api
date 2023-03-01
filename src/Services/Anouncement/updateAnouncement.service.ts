@@ -1,18 +1,18 @@
-import { PrismaClient } from "@prisma/client";
-import { AnouncementRequest } from "../../interfaces/anouncement";
+import { PrismaClient } from '@prisma/client';
+import { AnouncementRequest } from '../../interfaces/anouncement';
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
-const updateAnouncimentService = async (id:string, anouncdata:AnouncementRequest) =>{
+const updateAnouncimentService = async (
+  id: string,
+  anouncdata: AnouncementRequest,
+) => {
+  const anouncement = await prisma.anouncement.update({
+    where: { id: Number(id) },
+    data: { ...anouncdata },
+  });
 
-    const anouncement = await prisma.anouncement.update({
-        where: { id: Number(id) },
-        data:{...anouncdata},
-    })
-    
-    return anouncement
-}
+  return anouncement;
+};
 
-export default updateAnouncimentService
-
-    
+export default updateAnouncimentService;

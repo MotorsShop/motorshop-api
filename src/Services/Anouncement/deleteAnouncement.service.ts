@@ -1,14 +1,13 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
-const deleteAnouncimentService = async (id:string) =>{
+const deleteAnouncimentService = async (id: string) => {
+  const anouncement = await prisma.anouncement.delete({
+    where: { id: Number(id) },
+  });
 
-    const anouncement = await prisma.anouncement.delete({
-        where: {id: Number(id)}
-    })
-    
-    return anouncement
-}
+  return anouncement;
+};
 
-export default deleteAnouncimentService
+export default deleteAnouncimentService;
