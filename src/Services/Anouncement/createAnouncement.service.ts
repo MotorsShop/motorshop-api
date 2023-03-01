@@ -16,9 +16,10 @@ const createAnouncementService = async (data: AnouncementRequest) => {
     published,
     sold,
     cover_img,
+    userId,
   } = data;
 
-  const newAnouncement: AnouncementResponse = await prisma.anouncement.create({
+  const newAnouncement = await prisma.anouncement.create({
     data: {
       //id,
       title,
@@ -31,6 +32,7 @@ const createAnouncementService = async (data: AnouncementRequest) => {
       published,
       sold,
       cover_img,
+      userId,
       //created
     },
   });

@@ -51,7 +51,7 @@ const updateCommentControlers = async (req: Request, res: Response) => {
     const { id } = req.params;
     const data = req.body;
     const updateComment = await updateCommentService(id, data);
-    return res.status(200).json(updateComment)
+    return res.status(200).json(updateComment);
   } catch (error) {
     if (error instanceof Error) {
       return res.status(400).json({

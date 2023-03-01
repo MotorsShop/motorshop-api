@@ -9,6 +9,7 @@ export interface AnouncementRequest {
   published: boolean;
   sold: boolean;
   cover_img: string;
+  userId: number;
 }
 
 export interface AnouncementResponse {
@@ -23,5 +24,6 @@ export interface AnouncementResponse {
   published: boolean;
   sold: boolean;
   cover_img: string;
- //created:      Date
+  userId: number;
+  //created:      Date
 }
