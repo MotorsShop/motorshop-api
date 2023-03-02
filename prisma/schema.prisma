@@ -30,10 +30,11 @@ model Anouncement {
 }
 
 model Comment {
-  id      Int      @id @default(autoincrement())
-  comment String
-  //user_id String
-  created DateTime @updatedAt
+  id       Int      @id @default(autoincrement())
+  comment  String
+  author   User     @relation(fields: [authorId], references: [id])
+  authorId Int
+  created  DateTime @updatedAt
 }
 
 model User {
@@ -47,4 +48,5 @@ model User {
   type          String //admin comprador anunciante
   password      String
   anouncements  Anouncement[]
+  comments      Comment[]
 }
