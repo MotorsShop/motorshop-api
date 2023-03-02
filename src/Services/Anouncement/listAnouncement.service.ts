@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 
 const listAnouncementService = async () => {
   const anouncement = await prisma.anouncement.findMany({
-    include: { user: true },
+    //include: { user: true },
   });
 
   return anouncement;

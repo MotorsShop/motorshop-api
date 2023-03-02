@@ -26,5 +26,15 @@
     "jsonwebtoken": "^9.0.0",
     "prettier": "^2.8.4",
     "ts-node-dev": "^2.0.0"
-  }
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ]
+  
 }
