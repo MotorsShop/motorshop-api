@@ -1,0 +1,6 @@
+-- CreateTable
+CREATE TABLE "Image" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "imageId" INTEGER NOT NULL,
+    CONSTRAINT "Image_imageId_fkey" FOREIGN KEY ("imageId") REFERENCES "Anouncement" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
