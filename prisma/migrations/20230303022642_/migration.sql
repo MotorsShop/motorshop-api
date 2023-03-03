@@ -6,7 +6,7 @@ CREATE TYPE "TypeAnouncement" AS ENUM ('auction', 'sale');
 
 -- CreateTable
 CREATE TABLE "anouncement" (
-    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
+    "id" UUID NOT NULL,
     "title" TEXT NOT NULL,
     "year" INTEGER NOT NULL,
     "km" INTEGER NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE "anouncement" (
 
 -- CreateTable
 CREATE TABLE "comment" (
-    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
+    "id" UUID NOT NULL,
     "comment" TEXT NOT NULL,
     "authorId" UUID NOT NULL,
     "created" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -36,7 +36,7 @@ CREATE TABLE "comment" (
 
 -- CreateTable
 CREATE TABLE "user" (
-    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
+    "id" UUID NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "cpf" TEXT NOT NULL,

@@ -4,7 +4,7 @@ import listCommentService from '../Services/comment/listComment.service';
 import retrieveCommentService from '../Services/comment/retrieveComment.service';
 import updateCommentService from '../Services/comment/updateComment.service';
 import deleteCommentService from '../Services/comment/deleteComment.service';
-
+import listCommentForAnouncementService from '../Services/comment/listCommentForAnouncement.service';
 const createCommitControllers = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
@@ -23,6 +23,23 @@ const createCommitControllers = async (req: Request, res: Response) => {
 const listCommentControllers = async (req: Request, res: Response) => {
   try {
     const listComments = await listCommentService();
+    return res.json(listComments);
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(400).json({
+        message: error.message,
+      });
+    }
+  }
+};
+
+const listCommentsForAnoucementControllers = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const { id } = req.params;
+    const listComments = await listCommentForAnouncementService(id);
     return res.json(listComments);
   } catch (error) {
     if (error instanceof Error) {
@@ -82,4 +99,5 @@ export {
   retrieveCommentControlers,
   updateCommentControlers,
   deleteCommentControlers,
+  listCommentsForAnoucementControllers,
 };

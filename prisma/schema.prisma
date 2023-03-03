@@ -22,7 +22,7 @@ enum TypeAnouncement {
 
 model Anouncement {
   id           String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title        String //@db.VarChar(50)
+  title        String          //@db.VarChar(50)
   year         Int
   km           Int
   price        Float
