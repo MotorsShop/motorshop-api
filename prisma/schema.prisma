@@ -6,47 +6,61 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TypeVehicle {
+  car
+  motorbike
+}
+
+enum TypeAnouncement {
+  auction
+  sale
 }
 
 model Anouncement {
-  id           Int      @id @default(autoincrement())
+  id           String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   title        String //@db.VarChar(50)
   year         Int
   km           Int
   price        Float
   description  String
-  vehicle_type String
-  ad_type      String
+  vehicle_type TypeVehicle
+  ad_type      TypeAnouncement
   published    Boolean
   sold         Boolean
   cover_img    String
-  created      DateTime @updatedAt
-  user         User     @relation(fields: [userId], references: [id])
-  userId       Int
-
-  @@map("Anouncement")
+  created      DateTime        @default(now())
+  user         User            @relation(fields: [userId], references: [id])
+  userId       String          @db.Uuid
+  comments     Comment[]
+  @@map("anouncement")
 }
 
 model Comment {
-  id       Int      @id @default(autoincrement())
-  comment  String
-  author   User     @relation(fields: [authorId], references: [id])
-  authorId Int
-  created  DateTime @updatedAt
+  id            String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  comment       String
+  author        User        @relation(fields: [authorId], references: [id])
+  authorId      String      @db.Uuid
+  created       DateTime    @default(now())
+  anouncement   Anouncement @relation(fields: [AnouncementId], references: [id])
+  AnouncementId String      @db.Uuid
+  @@map("comment")
 }
 
 model User {
-  id            Int           @id @default(autoincrement())
+  id            String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name          String //@db.VarChar(50)
   email         String        @unique
   cpf           String        @unique
   phone         String
   date_of_birth String
   description   String
-  type          String //admin comprador anunciante
+  type          String
   password      String
   anouncements  Anouncement[]
   comments      Comment[]
+  @@map("user")
 }

@@ -9,7 +9,7 @@ import {
 
 const commentRoutes = Router();
 
-commentRoutes.post('', createCommitControllers);
+commentRoutes.post('/:id', createCommitControllers);
 commentRoutes.get('', listCommentControllers);
 commentRoutes.get('/:id', retrieveCommentControlers);
 commentRoutes.patch('/:id', updateCommentControlers);

@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 const retrieveCommentService = async (id: string) => {
   const retrieveComment = prisma.comment.findUnique({
-    where: { id: Number(id) },
+    where: { id: id },
   });
 
   return retrieveComment;

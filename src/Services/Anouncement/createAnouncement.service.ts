@@ -1,10 +1,7 @@
-import {
-  AnouncementRequest,
-  AnouncementResponse,
-} from '../../interfaces/anouncement';
+import { Anouncement } from '@prisma/client';
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
-const createAnouncementService = async (data: AnouncementRequest) => {
+const createAnouncementService = async (data: Anouncement) => {
   const {
     title,
     year,
@@ -21,7 +18,6 @@ const createAnouncementService = async (data: AnouncementRequest) => {
 
   const newAnouncement = await prisma.anouncement.create({
     data: {
-      //id,
       title,
       year,
       km,
@@ -33,7 +29,9 @@ const createAnouncementService = async (data: AnouncementRequest) => {
       sold,
       cover_img,
       userId,
-      //created
+    },
+    include: {
+      comments: true,
     },
   });
   return newAnouncement;

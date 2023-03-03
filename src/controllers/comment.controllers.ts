@@ -1,4 +1,4 @@
-import { query, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import createCommentService from '../Services/comment/createComment.service';
 import listCommentService from '../Services/comment/listComment.service';
 import retrieveCommentService from '../Services/comment/retrieveComment.service';
@@ -6,9 +6,10 @@ import updateCommentService from '../Services/comment/updateComment.service';
 import deleteCommentService from '../Services/comment/deleteComment.service';
 
 const createCommitControllers = async (req: Request, res: Response) => {
+  const { id } = req.params;
   try {
     const { ...data } = req.body;
-    const newComment = await createCommentService(data);
+    const newComment = await createCommentService(data, id);
     return res.status(201).json(newComment);
   } catch (error) {
     if (error instanceof Error) {

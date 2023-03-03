@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 const deleteAnouncimentService = async (id: string) => {
   const anouncement = await prisma.anouncement.delete({
-    where: { id: Number(id) },
+    where: { id: id },
   });
 
   return anouncement;

@@ -1,8 +1,12 @@
 export interface commentRequest {
   comment: string;
-  authorId: number;
+  authorId: string;
 }
 
-export interface commentResponse {
+export interface Comment {
+  id: string;
   comment: string;
+  authorId: string;
+  anouncementId: string;
+  created: Date;
 }

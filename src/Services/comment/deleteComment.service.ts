@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 
 const deleteCommentService = async (id: string) => {
   const deleteComment = await prisma.comment.delete({
-    where: { id: Number(id) },
+    where: { id: id },
   });
   return deleteComment;
 };

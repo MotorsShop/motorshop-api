@@ -8,7 +8,7 @@ const updateAnouncimentService = async (
   anouncdata: AnouncementRequest,
 ) => {
   const anouncement = await prisma.anouncement.update({
-    where: { id: Number(id) },
+    where: { id: id },
     data: { ...anouncdata },
   });
 
