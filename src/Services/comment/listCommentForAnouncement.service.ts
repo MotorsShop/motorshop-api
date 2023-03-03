@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 const listCommentForAnouncementService = async (id: string) => {
   const listComments = await prisma.comment.findMany({
-    where: { AnouncementId: id },
+    where: { anouncementId: id },
     include: {
       author: true,
     },

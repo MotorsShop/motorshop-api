@@ -1,7 +1,8 @@
-import { Anouncement } from '@prisma/client';
 import { PrismaClient } from '@prisma/client';
+import { AnouncementRequest } from '../../interfaces/anouncement';
 const prisma = new PrismaClient();
-const createAnouncementService = async (data: Anouncement) => {
+
+const createAnouncementService = async (data: AnouncementRequest) => {
   const {
     title,
     year,
@@ -10,30 +11,43 @@ const createAnouncementService = async (data: Anouncement) => {
     description,
     vehicle_type,
     ad_type,
-    published,
-    sold,
     cover_img,
     userId,
+    images,
   } = data;
 
   const newAnouncement = await prisma.anouncement.create({
     data: {
-      title,
-      year,
+      ad_type,
+      cover_img,
+      description,
       km,
       price,
-      description,
+      sold: false,
+      published: true,
+      title,
       vehicle_type,
-      ad_type,
-      published,
-      sold,
-      cover_img,
-      userId,
+      year,
+      user: { connect: { id: userId } },
     },
     include: {
       comments: true,
+      images: true,
+      user: true,
     },
   });
+  const array = [];
+  for (const image in images) {
+    array.push({
+      url: image,
+      anouncementId: newAnouncement.id,
+    });
+  }
+
+  await prisma.image.createMany({
+    data: array,
+  });
+
   return newAnouncement;
 };
 

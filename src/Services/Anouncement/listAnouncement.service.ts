@@ -6,6 +6,7 @@ const listAnouncementService = async () => {
     include: {
       comments: true,
       user: true,
+      images: true,
     },
   });
 

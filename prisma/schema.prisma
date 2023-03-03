@@ -22,21 +22,31 @@ enum TypeAnouncement {
 
 model Anouncement {
   id           String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title        String          //@db.VarChar(50)
+  title        String //@db.VarChar(50)
   year         Int
   km           Int
   price        Float
   description  String
   vehicle_type TypeVehicle
   ad_type      TypeAnouncement
-  published    Boolean
-  sold         Boolean
+  published    Boolean         
+  sold         Boolean         
   cover_img    String
   created      DateTime        @default(now())
   user         User            @relation(fields: [userId], references: [id])
   userId       String          @db.Uuid
   comments     Comment[]
+  images       Image[]
+
   @@map("anouncement")
+}
+
+model Image {
+  id            String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  url           String
+  anouncement   Anouncement @relation(fields: [anouncementId], references: [id])
+  anouncementId String      @db.Uuid
+  @@map("image")
 }
 
 model Comment {
@@ -45,8 +55,9 @@ model Comment {
   author        User        @relation(fields: [authorId], references: [id])
   authorId      String      @db.Uuid
   created       DateTime    @default(now())
-  anouncement   Anouncement @relation(fields: [AnouncementId], references: [id])
-  AnouncementId String      @db.Uuid
+  anouncement   Anouncement @relation(fields: [anouncementId], references: [id])
+  anouncementId String      @db.Uuid
+
   @@map("comment")
 }
 
@@ -62,5 +73,6 @@ model User {
   password      String
   anouncements  Anouncement[]
   comments      Comment[]
+
   @@map("user")
 }

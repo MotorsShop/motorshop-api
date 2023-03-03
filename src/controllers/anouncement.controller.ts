@@ -9,7 +9,6 @@ const createAnouncementControllers = async (req: Request, res: Response) => {
   try {
     const { ...data } = req.body;
     const newAnouncement = await createAnouncementService(data);
-
     return res.status(201).json(newAnouncement);
   } catch (error) {
     if (error instanceof Error) {
