@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { hash } from 'bcryptjs';
 import { UserRequest } from '../../interfaces/user';
+import createError from 'http-errors';
 
 const prisma = new PrismaClient();
 
@@ -15,6 +16,16 @@ const createUserService = async (data: UserRequest) => {
     password,
     date_of_birth,
   } = data;
+
+  const userAlreadyExists = await prisma.user.findUnique({
+    where: {
+      email,
+    },
+  });
+
+  if (userAlreadyExists) {
+    throw createError.BadRequest('User already exists!');
+  }
 
   const hashedPassword = await hash(password, 10);
 
