@@ -7,10 +7,10 @@ const updateCommentService = async (
   commentData: commentRequest,
 ) => {
   const updateComment = await prisma.comment.update({
-    where: { id: Number(id) },
+    where: { id: id },
     data: { ...commentData },
   });
-  return updateComment
+  return updateComment;
 };
 
-export default updateCommentService
+export default updateCommentService;

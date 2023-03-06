@@ -5,12 +5,14 @@ import {
   retrieveCommentControlers,
   updateCommentControlers,
   deleteCommentControlers,
+  listCommentsForAnoucementControllers,
 } from '../../controllers/comment.controllers';
 
 const commentRoutes = Router();
 
-commentRoutes.post('', createCommitControllers);
+commentRoutes.post('/:id', createCommitControllers);
 commentRoutes.get('', listCommentControllers);
+commentRoutes.get('/anouncement/:id', listCommentsForAnoucementControllers);
 commentRoutes.get('/:id', retrieveCommentControlers);
 commentRoutes.patch('/:id', updateCommentControlers);
 commentRoutes.delete('/:id', deleteCommentControlers);

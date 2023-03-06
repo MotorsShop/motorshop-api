@@ -4,26 +4,46 @@ export interface AnouncementRequest {
   km: number;
   price: number;
   description: string;
-  vehicle_type: string;
-  ad_type: string;
-  published: boolean;
-  sold: boolean;
+  vehicle_type: 'car' | 'motorbike';
+  ad_type: 'auction' | 'sale';
+  published?: boolean;
+  sold?: boolean;
   cover_img: string;
-  userId: number;
+  userId: string;
+  images: string[];
 }
 
-export interface AnouncementResponse {
-  //id:           number
-  title: string;
-  year: number;
-  km: number;
-  price: number;
-  description: string;
-  vehicle_type: string;
-  ad_type: string;
-  published: boolean;
-  sold: boolean;
-  cover_img: string;
-  userId: number;
-  //created:      Date
+export interface AnouncementUpdated {
+  title?: string;
+  year?: number;
+  km?: number;
+  price?: number;
+  description?: string;
+  vehicle_type?: 'car' | 'motorbike';
+  ad_type?: 'auction' | 'sale';
+  published?: boolean;
+  sold?: boolean;
+  cover_img?: string;
+  userId?: number;
 }
+// export interface Comment {
+//   id: string;
+//   comment: string;
+//   author: User;
+//   created: Date;
+//   announcement: Announcement;
+// }
+
+// export interface User {
+//   id: string;
+//   name: string;
+//   email: string;
+//   cpf: string;
+//   phone: string;
+//   dateOfBirth: string;
+//   description: string;
+//   type: string;
+//   password: string;
+//   announcements: Announcement[];
+//   comments: Comment[];
+// }
