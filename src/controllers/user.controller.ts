@@ -1,6 +1,9 @@
 import { Request, Response } from 'express';
 import createUserService from '../Services/User/createUser.service';
-import listUserService from '../Services/User/listUser.service';
+import deleteUserService from '../Services/User/deleteUser.service';
+import listUserService from '../Services/User/listUsers.service';
+import retrieveUserService from '../Services/User/retrieveUser.service';
+import updateUserService from '../Services/User/updateUser.service';
 
 const createUserController = async (req: Request, res: Response) => {
   try {
@@ -29,4 +32,55 @@ const listUserController = async (req: Request, res: Response) => {
   }
 };
 
-export { createUserController, listUserController };
+const retrieveUserController = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const idParsed = parseInt(id);
+    const user = await retrieveUserService(idParsed);
+    return res.status(200).json(user);
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(400).json({
+        message: error.message,
+      });
+    }
+  }
+};
+
+const updateUserController = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const idParsed = parseInt(id);
+    const data = req.body;
+    const user = await updateUserService(idParsed, data);
+    return res.status(200).json(user);
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(400).json({
+        message: error.message,
+      });
+    }
+  }
+};
+const deleteUserController = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const idParsed = parseInt(id);
+    await deleteUserService(idParsed);
+    return res.status(204).json({ message: 'User deleted succesfully!' });
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(400).json({
+        message: error.message,
+      });
+    }
+  }
+};
+
+export {
+  createUserController,
+  listUserController,
+  retrieveUserController,
+  updateUserController,
+  deleteUserController,
+};
