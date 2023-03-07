@@ -65,13 +65,13 @@ CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
 CREATE UNIQUE INDEX "user_cpf_key" ON "user"("cpf");
 
 -- AddForeignKey
-ALTER TABLE "anouncement" ADD CONSTRAINT "anouncement_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "anouncement" ADD CONSTRAINT "anouncement_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "image" ADD CONSTRAINT "image_anouncementId_fkey" FOREIGN KEY ("anouncementId") REFERENCES "anouncement"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "image" ADD CONSTRAINT "image_anouncementId_fkey" FOREIGN KEY ("anouncementId") REFERENCES "anouncement"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "comment" ADD CONSTRAINT "comment_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "comment" ADD CONSTRAINT "comment_anouncementId_fkey" FOREIGN KEY ("anouncementId") REFERENCES "anouncement"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "comment" ADD CONSTRAINT "comment_anouncementId_fkey" FOREIGN KEY ("anouncementId") REFERENCES "anouncement"("id") ON DELETE CASCADE ON UPDATE CASCADE;
