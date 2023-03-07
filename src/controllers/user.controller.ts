@@ -35,7 +35,7 @@ const listUserController = async (req: Request, res: Response) => {
 const retrieveUserController = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
-    const idParsed = parseInt(id);
+    const idParsed = id;
     const user = await retrieveUserService(idParsed);
     return res.status(200).json(user);
   } catch (error) {
@@ -50,7 +50,7 @@ const retrieveUserController = async (req: Request, res: Response) => {
 const updateUserController = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
-    const idParsed = parseInt(id);
+    const idParsed = id;
     const data = req.body;
     const user = await updateUserService(idParsed, data);
     return res.status(200).json(user);
@@ -65,7 +65,7 @@ const updateUserController = async (req: Request, res: Response) => {
 const deleteUserController = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
-    const idParsed = parseInt(id);
+    const idParsed = id;
     await deleteUserService(idParsed);
     return res.status(204).json({ message: 'User deleted succesfully!' });
   } catch (error) {

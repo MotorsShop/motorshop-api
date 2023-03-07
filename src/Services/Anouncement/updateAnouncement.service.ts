@@ -6,6 +6,7 @@ const updateAnouncimentService = async (
   id: string,
   anouncdata: AnouncementUpdated,
 ) => {
+  const array = [];
   const {
     ad_type,
     cover_img,
@@ -16,6 +17,7 @@ const updateAnouncimentService = async (
     sold,
     title,
     year,
+    images,
   } = anouncdata;
   const anouncement = await prisma.anouncement.update({
     where: { id: id },
@@ -31,6 +33,23 @@ const updateAnouncimentService = async (
       ad_type,
     },
   });
+
+  await prisma.image.deleteMany({
+    where: { anouncementId: anouncement.id },
+  });
+
+  if (images) {
+    for (const image of images) {
+      array.push({
+        url: image,
+        anouncementId: anouncement.id,
+      });
+    }
+
+    await prisma.image.createMany({
+      data: array,
+    });
+  }
 
   return anouncement;
 };

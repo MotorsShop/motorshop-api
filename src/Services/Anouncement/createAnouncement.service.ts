@@ -3,6 +3,7 @@ import { AnouncementRequest } from '../../interfaces/anouncement';
 const prisma = new PrismaClient();
 
 const createAnouncementService = async (data: AnouncementRequest) => {
+  const array = [];
   const {
     title,
     year,
@@ -36,8 +37,8 @@ const createAnouncementService = async (data: AnouncementRequest) => {
       user: true,
     },
   });
-  const array = [];
-  for (const image in images) {
+
+  for (const image of images) {
     array.push({
       url: image,
       anouncementId: newAnouncement.id,
