@@ -1,9 +1,15 @@
 import { PrismaClient } from '@prisma/client';
 import { AnouncementRequest } from '../../interfaces/anouncement';
+import { createAnouncementSerializer } from '../../serializers';
 const prisma = new PrismaClient();
 
 const createAnouncementService = async (data: AnouncementRequest) => {
   const array = [];
+  await createAnouncementSerializer.validate(data, {
+    stripUnknown: true,
+    abortEarly: false,
+  });
+
   const {
     title,
     year,

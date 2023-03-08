@@ -11,27 +11,31 @@ const createSessionService = async ({ email, password }: sessionRequest) => {
     where: {
       email,
     },
+    include: {
+      anouncements: true,
+      comments: true,
+    },
   });
   if (!user) {
     throw createError.NotFound('Invalid user or password');
   }
-
   const passwordMatch = await compare(password, user.password);
-  const emailMatch = await compare(password, user.email);
 
-  if (!passwordMatch || !emailMatch) {
+  if (!passwordMatch) {
     throw createError.Unauthorized('Invalid user or password');
   }
 
   const token = jwt.sign(
     {
+      id: user.id,
+    },
+    process.env.SECRET_KEY as string,
+    {
       expiresIn: '15h',
       subject: user.id,
     },
-    process.env.SECRET_KEY as string,
   );
-
-  return { ...user, token };
+  return { token, user };
 };
 
 export default createSessionService;

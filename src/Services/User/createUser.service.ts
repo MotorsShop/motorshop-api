@@ -1,7 +1,10 @@
 import { PrismaClient } from '@prisma/client';
 import { hash } from 'bcryptjs';
 import { UserRequest } from '../../interfaces/user';
-import { createUserSerializer } from '../../serializers';
+import {
+  createUserSerializer,
+  userNotPasswordSerializer,
+} from '../../serializers';
 import createError from 'http-errors';
 
 const prisma = new PrismaClient();
@@ -35,7 +38,7 @@ const createUserService = async (data: UserRequest) => {
 
   const hashedPassword = await hash(password, 10);
 
-  await prisma.user.create({
+  const createData = await prisma.user.create({
     data: {
       name,
       email,
@@ -46,9 +49,15 @@ const createUserService = async (data: UserRequest) => {
       password: hashedPassword,
       date_of_birth,
     },
+    include: {
+      anouncements: true,
+    },
+  });
+  await userNotPasswordSerializer.validate(createData, {
+    stripUnknown: true,
   });
 
-  return { email, name, cpf, phone, description, type, date_of_birth };
+  return createData;
 };
 
 export default createUserService;
