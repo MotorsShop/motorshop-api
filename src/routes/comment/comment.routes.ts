@@ -7,14 +7,41 @@ import {
   deleteCommentControlers,
   listCommentsForAnoucementControllers,
 } from '../../controllers/comment.controllers';
+import ensureAdminOrOwner from '../../middlewares/ensureAdminOrOwner.middleware';
+import ensureAuthMiddleware from '../../middlewares/ensureAuth.middleware';
 
 const commentRoutes = Router();
 
-commentRoutes.post('/:id', createCommitControllers);
-commentRoutes.get('', listCommentControllers);
-commentRoutes.get('/anouncement/:id', listCommentsForAnoucementControllers);
-commentRoutes.get('/:id', retrieveCommentControlers);
-commentRoutes.patch('/:id', updateCommentControlers);
-commentRoutes.delete('/:id', deleteCommentControlers);
+commentRoutes.post('/:id', ensureAuthMiddleware, createCommitControllers);
+commentRoutes.get(
+  '',
+  ensureAuthMiddleware,
+  ensureAdminOrOwner,
+  listCommentControllers,
+);
+commentRoutes.get(
+  '/anouncement/:id',
+  ensureAuthMiddleware,
+  ensureAdminOrOwner,
+  listCommentsForAnoucementControllers,
+);
+commentRoutes.get(
+  '/:id',
+  ensureAuthMiddleware,
+  ensureAdminOrOwner,
+  retrieveCommentControlers,
+);
+commentRoutes.patch(
+  '/:id',
+  ensureAuthMiddleware,
+  ensureAdminOrOwner,
+  updateCommentControlers,
+);
+commentRoutes.delete(
+  '/:id',
+  ensureAuthMiddleware,
+  ensureAdminOrOwner,
+  deleteCommentControlers,
+);
 
 export default commentRoutes;
