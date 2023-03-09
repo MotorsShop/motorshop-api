@@ -25,7 +25,6 @@ const createSessionService = async ({ email, password }: sessionRequest) => {
     throw createError.Unauthorized('Invalid user or password');
   }
 
-
   const decoded = {
     email: user.email,
     id: user.id,
@@ -39,8 +38,7 @@ const createSessionService = async ({ email, password }: sessionRequest) => {
 
   const token = jwt.sign(decoded, process.env.SECRET_KEY as string, options);
 
-  return { ...user, token };
-
+  return { user, token };
 };
 
 export default createSessionService;

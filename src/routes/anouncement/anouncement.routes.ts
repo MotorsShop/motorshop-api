@@ -12,18 +12,8 @@ import ensureAuthMiddleware from '../../middlewares/ensureAuth.middleware';
 const anouncementRoutes = Router();
 
 anouncementRoutes.post('', ensureAuthMiddleware, createAnouncementControllers);
-anouncementRoutes.get(
-  '',
-  ensureAuthMiddleware,
-  ensureAnnouncementeMiddlewareOwner,
-  listAnouncementControllers,
-);
-anouncementRoutes.get(
-  '/:id',
-  ensureAuthMiddleware,
-  ensureAnnouncementeMiddlewareOwner,
-  retrieveAnouncementControllers,
-);
+anouncementRoutes.get('', listAnouncementControllers);
+anouncementRoutes.get('/:id', retrieveAnouncementControllers);
 anouncementRoutes.delete(
   '/:id',
   ensureAuthMiddleware,
