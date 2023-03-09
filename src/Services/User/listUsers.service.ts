@@ -5,9 +5,9 @@ const listUserService = async () => {
   const getUser = await prisma.user.findMany({
     include: {
       anouncements: true,
+      comments: true,
     },
   });
-  // const user = await prisma.user.findMany();
 
   return getUser;
 };
