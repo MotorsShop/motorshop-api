@@ -35,8 +35,7 @@ const listUserController = async (req: Request, res: Response) => {
 const retrieveUserController = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
-    const idParsed = parseInt(id);
-    const user = await retrieveUserService(idParsed);
+    const user = await retrieveUserService(id);
     return res.status(200).json(user);
   } catch (error) {
     if (error instanceof Error) {
@@ -50,9 +49,8 @@ const retrieveUserController = async (req: Request, res: Response) => {
 const updateUserController = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
-    const idParsed = parseInt(id);
     const data = req.body;
-    const user = await updateUserService(idParsed, data);
+    const user = await updateUserService(id, data);
     return res.status(200).json(user);
   } catch (error) {
     if (error instanceof Error) {
@@ -65,8 +63,7 @@ const updateUserController = async (req: Request, res: Response) => {
 const deleteUserController = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
-    const idParsed = parseInt(id);
-    await deleteUserService(idParsed);
+    await deleteUserService(id);
     return res.status(204).json({ message: 'User deleted succesfully!' });
   } catch (error) {
     if (error instanceof Error) {

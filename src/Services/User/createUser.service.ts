@@ -1,10 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 import { hash } from 'bcryptjs';
-import console from 'console';
 import { UserRequest } from '../../interfaces/user';
 import { createUserSerializer } from '../../serializers';
 import createError from 'http-errors';
-
 
 const prisma = new PrismaClient();
 

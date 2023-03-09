@@ -6,13 +6,35 @@ import {
   deleteAnouncementControllers,
   updateAnouncementControllers,
 } from '../../controllers/anouncement.controller';
+import ensureAnnouncementeMiddlewareOwner from '../../middlewares/ensureAnnouncementOwner.middleware';
+import ensureAuthMiddleware from '../../middlewares/ensureAuth.middleware';
 
 const anouncementRoutes = Router();
 
-anouncementRoutes.post('', createAnouncementControllers);
-anouncementRoutes.get('', listAnouncementControllers);
-anouncementRoutes.get('/:id', retrieveAnouncementControllers);
-anouncementRoutes.delete('/:id', deleteAnouncementControllers);
-anouncementRoutes.patch('/:id', updateAnouncementControllers);
+anouncementRoutes.post('', ensureAuthMiddleware, createAnouncementControllers);
+anouncementRoutes.get(
+  '',
+  ensureAuthMiddleware,
+  ensureAnnouncementeMiddlewareOwner,
+  listAnouncementControllers,
+);
+anouncementRoutes.get(
+  '/:id',
+  ensureAuthMiddleware,
+  ensureAnnouncementeMiddlewareOwner,
+  retrieveAnouncementControllers,
+);
+anouncementRoutes.delete(
+  '/:id',
+  ensureAuthMiddleware,
+  ensureAnnouncementeMiddlewareOwner,
+  deleteAnouncementControllers,
+);
+anouncementRoutes.patch(
+  '/:id',
+  ensureAuthMiddleware,
+  ensureAnnouncementeMiddlewareOwner,
+  updateAnouncementControllers,
+);
 
 export default anouncementRoutes;
