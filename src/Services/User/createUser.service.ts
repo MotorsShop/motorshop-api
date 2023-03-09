@@ -5,7 +5,7 @@ import {
   createUserSerializer,
   userNotPasswordSerializer,
 } from '../../serializers';
-import createError from 'http-errors';
+import { AppError } from '../../errors/appError';
 
 const prisma = new PrismaClient();
 
@@ -33,7 +33,7 @@ const createUserService = async (data: UserRequest) => {
   });
 
   if (userAlreadyExists) {
-    throw createError.BadRequest('User already exists!');
+    throw new AppError('User already exists!', 403);
   }
 
   const hashedPassword = await hash(password, 10);
