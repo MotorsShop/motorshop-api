@@ -4,6 +4,7 @@ import { createAnouncementSerializer } from '../../serializers';
 const prisma = new PrismaClient();
 
 const createAnouncementService = async (data: AnouncementRequest) => {
+  const array = [];
   await createAnouncementSerializer.validate(data, {
     stripUnknown: true,
     abortEarly: false,
@@ -42,8 +43,8 @@ const createAnouncementService = async (data: AnouncementRequest) => {
       user: true,
     },
   });
-  const array = [];
-  for (const image in images) {
+
+  for (const image of images) {
     array.push({
       url: image,
       anouncementId: newAnouncement.id,

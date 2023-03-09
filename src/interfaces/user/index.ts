@@ -19,6 +19,7 @@ export interface UserResponse {
   type: string;
   password?: string;
   date_of_birth: string;
+  anoucements: string[];
 }
 
 export interface UserUpdate {

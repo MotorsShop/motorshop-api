@@ -7,7 +7,6 @@ const updateUserService = async (userId: string, data: UserUpdate) => {
     where: { id: userId },
     data: data,
   });
-
   return updateUser;
 };
 
