@@ -4,7 +4,7 @@ import { compare } from 'bcryptjs';
 import createError from 'http-errors';
 import jwt from 'jsonwebtoken';
 const prisma = new PrismaClient();
-// import 'dotenv/config';
+import 'dotenv/config';
 
 const createSessionService = async ({ email, password }: sessionRequest) => {
   const user = await prisma.user.findUnique({
@@ -25,17 +25,22 @@ const createSessionService = async ({ email, password }: sessionRequest) => {
     throw createError.Unauthorized('Invalid user or password');
   }
 
-  const token = jwt.sign(
-    {
-      id: user.id,
-    },
-    process.env.SECRET_KEY as string,
-    {
-      expiresIn: '15h',
-      subject: user.id,
-    },
-  );
-  return { token, user };
+
+  const decoded = {
+    email: user.email,
+    id: user.id,
+    type: user.type,
+  };
+
+  const options = {
+    expiresIn: '15h',
+    subject: user.id,
+  };
+
+  const token = jwt.sign(decoded, process.env.SECRET_KEY as string, options);
+
+  return { ...user, token };
+
 };
 
 export default createSessionService;
