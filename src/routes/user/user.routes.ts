@@ -14,16 +14,10 @@ const userRoutes = Router();
 userRoutes.post('', createUserController);
 userRoutes.get(
   '',
-  ensureAuthMiddleware,
-  ensureAdminOrOwner,
+
   listUserController,
 );
-userRoutes.get(
-  '/:id',
-  ensureAuthMiddleware,
-  ensureAdminOrOwner,
-  retrieveUserController,
-);
+userRoutes.get('/:id', retrieveUserController);
 userRoutes.patch(
   '/:id',
   ensureAuthMiddleware,

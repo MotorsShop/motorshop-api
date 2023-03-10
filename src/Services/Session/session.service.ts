@@ -11,6 +11,10 @@ const createSessionService = async ({ email, password }: sessionRequest) => {
     where: {
       email,
     },
+    include: {
+      anouncements: true,
+      comments: true,
+    },
   });
   if (!user) {
     throw createError.NotFound('Invalid user or password');
@@ -34,7 +38,7 @@ const createSessionService = async ({ email, password }: sessionRequest) => {
 
   const token = jwt.sign(decoded, process.env.SECRET_KEY as string, options);
 
-  return { ...user, token };
+  return { user, token };
 };
 
 export default createSessionService;

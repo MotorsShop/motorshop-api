@@ -10,6 +10,9 @@ const createCommentService = async (data: commentRequest, id: string) => {
       comment,
       author: { connect: { id: authorId } },
     },
+    include: {
+      author: true,
+    },
   });
   return newComment;
 };

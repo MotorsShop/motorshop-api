@@ -33,7 +33,7 @@ model Anouncement {
   sold         Boolean         
   cover_img    String
   created      DateTime        @default(now())
-  user         User            @relation(fields: [userId], references: [id])
+  user         User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String          @db.Uuid
   comments     Comment[]
   images       Image[]
@@ -44,7 +44,7 @@ model Anouncement {
 model Image {
   id            String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   url           String
-  anouncement   Anouncement @relation(fields: [anouncementId], references: [id])
+  anouncement   Anouncement @relation(fields: [anouncementId], references: [id], onDelete: Cascade)
   anouncementId String      @db.Uuid
   @@map("image")
 }
@@ -55,7 +55,7 @@ model Comment {
   author        User        @relation(fields: [authorId], references: [id])
   authorId      String      @db.Uuid
   created       DateTime    @default(now())
-  anouncement   Anouncement @relation(fields: [anouncementId], references: [id])
+  anouncement   Anouncement @relation(fields: [anouncementId], references: [id], onDelete: Cascade)
   anouncementId String      @db.Uuid
 
   @@map("comment")

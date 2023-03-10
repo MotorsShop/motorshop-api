@@ -49,12 +49,15 @@ const createUserService = async (data: UserRequest) => {
       password: hashedPassword,
       date_of_birth,
     },
+    include: {
+      anouncements: true,
+    },
   });
-  const userOutput = await userNotPasswordSerializer.validate(createData, {
+  await userNotPasswordSerializer.validate(createData, {
     stripUnknown: true,
   });
 
-  return userOutput;
+  return createData;
 };
 
 export default createUserService;

@@ -25,6 +25,7 @@ export interface AnouncementUpdated {
   sold?: boolean;
   cover_img?: string;
   userId?: number;
+  images?: string[];
 }
 // export interface Comment {
 //   id: string;
