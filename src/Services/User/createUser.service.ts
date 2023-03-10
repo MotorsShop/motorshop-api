@@ -32,8 +32,17 @@ const createUserService = async (data: UserRequest) => {
     },
   });
 
+  const cpfAlreadyExists = await prisma.user.findUnique({
+    where: {
+      cpf,
+    },
+  });
+
   if (userAlreadyExists) {
     throw new AppError('User already exists!', 403);
+  }
+  if (cpfAlreadyExists) {
+    throw new AppError('Cpf already exists!', 403);
   }
 
   const hashedPassword = await hash(password, 10);
