@@ -5,6 +5,7 @@ export interface UserRequest {
   phone: string;
   description: string;
   type: string;
+  token_reset_password?: string;
   password: string;
   date_of_birth: string;
 }
@@ -18,6 +19,7 @@ export interface UserResponse {
   description: string;
   type: string;
   password?: string;
+  token_reset_password?: string;
   date_of_birth: string;
   anoucements: string[];
 }
@@ -30,5 +32,6 @@ export interface UserUpdate {
   description?: string;
   type?: string;
   password?: string;
+  token_reset_password?: string;
   date_of_birth?: string;
 }

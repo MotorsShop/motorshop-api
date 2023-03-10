@@ -10,6 +10,7 @@ const updateAnouncimentService = async (
   const {
     ad_type,
     cover_img,
+    vehicle_type,
     description,
     km,
     price,
@@ -23,6 +24,7 @@ const updateAnouncimentService = async (
     where: { id: id },
     data: {
       description,
+      vehicle_type,
       cover_img,
       price,
       km,

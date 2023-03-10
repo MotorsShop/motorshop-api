@@ -14,8 +14,8 @@ CREATE TABLE "anouncement" (
     "description" TEXT NOT NULL,
     "vehicle_type" "TypeVehicle" NOT NULL,
     "ad_type" "TypeAnouncement" NOT NULL,
-    "published" BOOLEAN NOT NULL,
-    "sold" BOOLEAN NOT NULL,
+    "published" BOOLEAN NOT NULL DEFAULT true,
+    "sold" BOOLEAN NOT NULL DEFAULT false,
     "cover_img" TEXT NOT NULL,
     "created" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "userId" UUID NOT NULL,
@@ -54,6 +54,7 @@ CREATE TABLE "user" (
     "description" TEXT NOT NULL,
     "type" TEXT NOT NULL,
     "password" TEXT NOT NULL,
+    "token_reset_password" TEXT,
 
     CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );
