@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { AppError } from '../errors/appError';
 import createUserService from '../Services/User/createUser.service';
 import deleteUserService from '../Services/User/deleteUser.service';
 import listUserService from '../Services/User/listUsers.service';
@@ -25,7 +26,7 @@ const listUserController = async (req: Request, res: Response) => {
     const user = await listUserService();
     return res.status(200).json(user);
   } catch (error) {
-    if (error instanceof Error) {
+    if (error instanceof AppError) {
       return res.status(400).json({
         message: error.message,
       });

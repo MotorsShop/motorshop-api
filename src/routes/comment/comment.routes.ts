@@ -13,24 +13,9 @@ import ensureAuthMiddleware from '../../middlewares/ensureAuth.middleware';
 const commentRoutes = Router();
 
 commentRoutes.post('/:id', ensureAuthMiddleware, createCommitControllers);
-commentRoutes.get(
-  '',
-  ensureAuthMiddleware,
-  ensureAdminOrOwner,
-  listCommentControllers,
-);
-commentRoutes.get(
-  '/anouncement/:id',
-  ensureAuthMiddleware,
-  ensureAdminOrOwner,
-  listCommentsForAnoucementControllers,
-);
-commentRoutes.get(
-  '/:id',
-  ensureAuthMiddleware,
-  ensureAdminOrOwner,
-  retrieveCommentControlers,
-);
+commentRoutes.get('', listCommentControllers);
+commentRoutes.get('/anouncement/:id', listCommentsForAnoucementControllers);
+commentRoutes.get('/:id', retrieveCommentControlers);
 commentRoutes.patch(
   '/:id',
   ensureAuthMiddleware,
