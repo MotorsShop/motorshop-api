@@ -29,8 +29,8 @@ model Anouncement {
   description  String
   vehicle_type TypeVehicle
   ad_type      TypeAnouncement
-  published    Boolean         
-  sold         Boolean         
+  published    Boolean         @default(true) 
+  sold         Boolean         @default(false)   
   cover_img    String
   created      DateTime        @default(now())
   user         User            @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -62,17 +62,18 @@ model Comment {
 }
 
 model User {
-  id            String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name          String //@db.VarChar(50)
-  email         String        @unique
-  cpf           String        @unique
-  phone         String
-  date_of_birth String
-  description   String
-  type          String
-  password      String
-  anouncements  Anouncement[]
-  comments      Comment[]
+  id              String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name            String        //@db.VarChar(50)
+  email           String        @unique
+  cpf             String        @unique
+  phone           String
+  date_of_birth   String
+  description     String
+  type            String
+  password        String
+  token_reset_password  String?
+  anouncements    Anouncement[]
+  comments        Comment[]
 
   @@map("user")
 }

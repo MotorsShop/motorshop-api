@@ -8,7 +8,10 @@ import {
 } from '../../controllers/user.controller';
 import ensureAdminOrOwner from '../../middlewares/ensureAdminOrOwner.middleware';
 import ensureAuthMiddleware from '../../middlewares/ensureAuth.middleware';
-
+import {
+  sendUserResetPasswordController,
+  resetPasswordController,
+} from '../../controllers/user.controller';
 const userRoutes = Router();
 
 userRoutes.post('', createUserController);
@@ -30,5 +33,9 @@ userRoutes.delete(
   ensureAdminOrOwner,
   deleteUserController,
 );
+
+userRoutes.patch('/password/:token', resetPasswordController);
+
+userRoutes.post('/resetpassword', sendUserResetPasswordController);
 
 export default userRoutes;

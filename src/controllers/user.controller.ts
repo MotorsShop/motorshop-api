@@ -4,7 +4,8 @@ import deleteUserService from '../Services/User/deleteUser.service';
 import listUserService from '../Services/User/listUsers.service';
 import retrieveUserService from '../Services/User/retrieveUser.service';
 import updateUserService from '../Services/User/updateUser.service';
-
+import sendResetPasswordServices from '../Services/User/sendResetPassword.services';
+import resetPasswordServices from '../Services/User/resetPassword.services';
 const createUserController = async (req: Request, res: Response) => {
   try {
     const { ...data } = req.body;
@@ -74,7 +75,40 @@ const deleteUserController = async (req: Request, res: Response) => {
   }
 };
 
+const sendUserResetPasswordController = async (req: Request, res: Response) => {
+  try {
+    const { email } = req.body;
+    const protocol = req.protocol;
+    const host = req.get('host');
+    await sendResetPasswordServices(email, protocol, host);
+    return res.json({ message: 'token send' });
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(400).json({
+        message: error.message,
+      });
+    }
+  }
+};
+
+const resetPasswordController = async (req: Request, res: Response) => {
+  try {
+    const { token } = req.params;
+    const { newPassword } = req.body;
+    await resetPasswordServices(token, newPassword);
+    return res.json({ message: 'password changed' });
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(400).json({
+        message: error.message,
+      });
+    }
+  }
+};
+
 export {
+  sendUserResetPasswordController,
+  resetPasswordController,
   createUserController,
   listUserController,
   retrieveUserController,
