@@ -1053,3 +1053,15 @@ vazio
 
 | Código do Erro | Descrição |
 | -------------- | --------- |
+
+## Autores
+
+- [Ely Muniz](https://github.com/ElyMuniz)
+
+- [Naiane Reis](https://github.com/NaianeReis27)
+
+- [Erika Fábio](https://github.com/erikafabio)
+
+- [José Henrique](https://github.com/zimwolfgang7k)
+
+- [Julio Caputo](https://github.com/juliocaputo1)
